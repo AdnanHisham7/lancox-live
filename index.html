@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lancox - Bridging the Best to the Esteemed Hands</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Bootstrap Icons CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Background Image Styling for Hero */
+        .hero-image-bg {
+            background-image: url('./assets/hero-bg.svg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .text-gold {
+            color: #8A693D;
+        }
+
+        .bg-gold {
+            background-color: #8A693D;
+        }
+
+        .hover-gold:hover {
+            background-color: #b3874e;
+        }
+
+        /* Unified Button Styles */
+        .btn-primary {
+            background-color: #8A693D;
+            color: #FFFBEB;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(138, 105, 61, 0.3), 0 2px 4px -1px rgba(138, 105, 61, 0.2);
+            border: none;
+            cursor: pointer;
+
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(138, 105, 61, 0.4), 0 4px 6px -2px rgba(138, 105, 61, 0.3);
+            background-color: #b3874e;
+        }
+
+        /* CTA Button Variants (from liked CTA) */
+        .cta-primary {
+            background-color: #f8fafc;
+            color: #8A693D;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+
+        }
+
+        .cta-primary:hover {
+            background-color: #e2e8f0;
+            cursor: pointer;
+            transform: translateY(-1px);
+            cursor: pointer;
+
+        }
+
+        .btn-secondary {
+            color: #f1f5f9;
+            background-color: transparent;
+            border: 1px solid #f1f5f9;
+            transition: all 0.3s ease;
+            cursor: pointer;
+
+        }
+
+        .btn-secondary:hover {
+            background-color: #f1f5f9;
+            color: #8A693D;
+            border-color: #f1f5f9;
+            transform: translateY(-1px);
+        }
+
+        .logo-glow {
+            filter: drop-shadow(0 0 10px rgba(138, 105, 61, 0.3));
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #8A693D;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .image-grid-item {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .image-grid-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .image-grid-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-grid-item img {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .image-grid-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Scroll Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scroll-animate.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Card Animations */
+        .card-animate {
+            transition: all 0.4s ease;
+        }
+
+        .card-animate.animate {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+        }
+
+        /* Industry Icons Animation */
+        .industry-item {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .industry-item.animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* List Items Stagger */
+        .stagger-item {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.4s ease;
+        }
+
+        .stagger-item.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .stagger-item:nth-child(1).animate {
+            transition-delay: 0.1s;
+        }
+
+        .stagger-item:nth-child(2).animate {
+            transition-delay: 0.2s;
+        }
+
+        .stagger-item:nth-child(3).animate {
+            transition-delay: 0.3s;
+        }
+
+        .stagger-item:nth-child(4).animate {
+            transition-delay: 0.4s;
+        }
+
+        .stagger-item:nth-child(5).animate {
+            transition-delay: 0.5s;
+        }
+
+        .stagger-item:nth-child(6).animate {
+            transition-delay: 0.6s;
+        }
+
+        /* Why Choose Card Hover */
+        .why-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+
+        .why-card:hover {
+            transform: translateY(-4px);
+            border-color: #8A693D;
+            box-shadow: 0 20px 25px -5px rgba(138, 105, 61, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-[#0F172B]">
+    <nav class="fixed w-full z-50 bg-[#0F172B]/10 backdrop-blur-md border-b border-slate-800/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 sm:h-20">
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center logo-glow">
+                        <img src="./assets/logo.svg" alt="Lancox Logo"
+                            class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain">
+                    </a>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="nav-link text-white hover:text-gold font-medium">Home</a>
+                    <a href="/about/" class="nav-link text-white hover:text-gold font-medium">About Us</a>
+                    <a href="/products/" class="nav-link text-white hover:text-gold font-medium">Products</a>
+                    <a href="/industries/" class="nav-link text-white hover:text-gold font-medium">Industries</a>
+                    <a href="/contact/" class="nav-link text-white hover:text-gold font-medium">Contact</a>
+                </div>
+
+                <div class="hidden md:block">
+                    <a href="/qoute/" class="btn-secondary px-6 py-2.5 rounded-full font-semibold">
+                        Get a Quote
+                    </a>
+                </div>
+
+                <button id="mobile-menu-toggle" class="md:hidden text-white p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu"
+                class="md:hidden hidden absolute top-full left-0 w-full bg-[#0F172B]/95 backdrop-blur-md border-b border-slate-800/20 transition-all duration-300 ease-in-out transform scale-y-0 origin-top overflow-hidden">
+                <div class="px-4 py-6 space-y-4">
+                    <a href="/"
+                        class="block nav-link text-white hover:text-gold font-medium py-3 text-lg border-b border-slate-700/50">Home</a>
+                    <a href="/about/"
+                        class="block nav-link text-white hover:text-gold font-medium py-3 text-lg border-b border-slate-700/50">About
+                        Us</a>
+                    <a href="/products/"
+                        class="block nav-link text-white hover:text-gold font-medium py-3 text-lg border-b border-slate-700/50">Products</a>
+                    <a href="/industries/"
+                        class="block nav-link text-white hover:text-gold font-medium py-3 text-lg border-b border-slate-700/50">Industries</a>
+                    <a href="/contact/"
+                        class="block nav-link text-white hover:text-gold font-medium py-3 text-lg border-b border-slate-700/50">Contact</a>
+                    <div class="pt-4">
+                        <a href="/qoute/"
+                            class="block w-full btn-secondary px-6 py-3 rounded-full font-semibold text-center">
+                            Get a Quote
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="relative min-h-screen pt-20 overflow-hidden scroll-animate">
+        <div class="absolute inset-0 hero-image-bg">
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+            <div class="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-200px)]">
+                <div class="space-y-8">
+                    <div class="space-y-4">
+                        <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
+                            Bridging the Best to
+                            <span class="text-gold block mt-2">Esteemed Hands</span>
+                        </h1>
+                        <p class="text-lg text-slate-300 max-w-xl leading-relaxed">
+                            At Lancox, our mission is to empower construction professionals by providing
+                            high-quality management solutions that are accessible, flexible, and designed to meet the
+                            needs of diverse project teams.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="btn-primary px-8 py-4 rounded-full font-semibold text-lg">
+                            Explore Products
+                        </button>
+                        <button class="btn-secondary px-8 py-4 rounded-full font-semibold text-lg">
+                            Request A Quote
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="image-grid-item rounded-xl overflow-hidden shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=400&q=80"
+                        alt="Industrial welding" class="w-full h-48 object-cover">
+                </div>
+                <div class="image-grid-item rounded-xl overflow-hidden shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=400&q=80"
+                        alt="Shipping port" class="w-full h-48 object-cover">
+                </div>
+                <div class="image-grid-item rounded-xl overflow-hidden shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&q=80"
+                        alt="Metal fabrication" class="w-full h-48 object-cover">
+                </div>
+                <div class="image-grid-item rounded-xl overflow-hidden shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&q=80"
+                        alt="Professional welding" class="w-full h-48 object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Served Section -->
+    <section id="industries" class="py-20 bg-[#0F172B] scroll-animate">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-white mb-16">Industries Served</h2>
+
+            <div class="flex flex-wrap justify-center items-center gap-8 lg:gap-16 mb-20">
+                <div class="industry-item flex flex-col items-center space-y-2">
+                    <div class="w-16 h-16 flex items-center justify-center">
+                        <i class="bi bi-lightning-charge-fill text-white text-4xl"></i>
+                    </div>
+                    <span class="text-slate-300 text-sm">Electrical</span>
+                </div>
+
+                <div class="hidden lg:block w-20 h-px bg-slate-600"></div>
+
+                <div class="industry-item flex flex-col items-center space-y-2">
+                    <div class="w-16 h-16 flex items-center justify-center">
+                        <i class="bi bi-gear-fill text-white text-4xl"></i>
+                    </div>
+                    <span class="text-slate-300 text-sm">Manufacturing</span>
+                </div>
+
+                <div class="hidden lg:block w-20 h-px bg-slate-600"></div>
+
+                <div class="industry-item flex flex-col items-center space-y-2">
+                    <div class="w-16 h-16 flex items-center justify-center">
+                        <i class="bi bi-lightbulb-fill text-white text-4xl"></i>
+                    </div>
+                    <span class="text-slate-300 text-sm">Energy</span>
+                </div>
+
+                <div class="hidden lg:block w-20 h-px bg-slate-600"></div>
+
+                <div class="industry-item flex flex-col items-center space-y-2">
+                    <div class="w-16 h-16 flex items-center justify-center">
+                        <i class="bi bi-building-fill text-white text-4xl"></i>
+                    </div>
+                    <span class="text-slate-300 text-sm">Construction</span>
+                </div>
+            </div>
+
+            <hr class="border-slate-700 mb-20">
+
+            <!-- Your Trusted Partner Section -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+                <div class="space-y-6">
+                    <h3 class="text-3xl font-bold text-white">
+                        Your Trusted Partner<br>
+                        in <span class="text-gold">Industrial Excellence</span>
+                    </h3>
+                    <p class="text-slate-300 leading-relaxed">
+                        Based in Abdal Ali near Ziyde Oudh, LANCOX is a premier trading company specializing in
+                        the supply of industrial equipment, tools, and materials. We serve a wide range of industries
+                        and project types across sectors.
+                    </p>
+                    <p class="text-slate-300 leading-relaxed">
+                        With a commitment to quality, reliability, and innovation, we connect global manufacturers with
+                        regional industries, ensuring seamless procurement and timely delivery.
+                    </p>
+                    <a href="about.html" class="inline-flex items-center text-gold hover:text-yellow-600 font-semibold">
+                        Learn More About Us →
+                    </a>
+                </div>
+                <div class="bg-slate-700 rounded-xl h-80 flex items-center justify-center">
+                    <span class="text-slate-500 text-lg">Image Placeholder</span>
+                </div>
+            </div>
+            <hr class="border-slate-700">
+
+        </div>
+    </section>
+
+
+    <!-- Global Trade Network Section -->
+    <section class="py-20 bg-[#0F172B] scroll-animate">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">
+                    Global <span class="text-gold">Trade Network</span>
+                </h2>
+                <p class="text-slate-300">Comprehensive industrial solutions across multiple disciplines</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 items-start">
+                <div class="bg-slate-700 rounded-xl p-8 h-96 flex items-center justify-center scroll-animate">
+                    <div class="text-center">
+                        <svg class="w-full h-64 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                        </svg>
+                        <p class="text-slate-500 mt-4">World Map Visualization</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-slate-800 rounded-lg p-6 border border-slate-700 card-animate">
+                        <h4 class="text-white font-semibold mb-4">Middle East</h4>
+                        <ul class="space-y-2 text-slate-300 text-sm">
+                            <li class="stagger-item">• Saudi Arabia</li>
+                            <li class="stagger-item">• UAE</li>
+                            <li class="stagger-item">• Qatar</li>
+                            <li class="stagger-item">• Kuwait</li>
+                            <li class="stagger-item">• Oman</li>
+                            <li class="stagger-item">• Bahrain</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-lg p-6 border border-slate-700 card-animate">
+                        <h4 class="text-white font-semibold mb-4">Africa</h4>
+                        <ul class="space-y-2 text-slate-300 text-sm">
+                            <li class="stagger-item">• Egypt</li>
+                            <li class="stagger-item">• Nigeria</li>
+                            <li class="stagger-item">• South Africa</li>
+                            <li class="stagger-item">• Kenya</li>
+                            <li class="stagger-item">• Ghana</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-lg p-6 border border-slate-700 card-animate">
+                        <h4 class="text-white font-semibold mb-4">Asia</h4>
+                        <ul class="space-y-2 text-slate-300 text-sm">
+                            <li class="stagger-item">• India</li>
+                            <li class="stagger-item">• China</li>
+                            <li class="stagger-item">• Singapore</li>
+                            <li class="stagger-item">• Malaysia</li>
+                            <li class="stagger-item">• Indonesia</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-lg p-6 border border-slate-700 card-animate">
+                        <h4 class="text-white font-semibold mb-4">Europe</h4>
+                        <ul class="space-y-2 text-slate-300 text-sm">
+                            <li class="stagger-item">• Germany</li>
+                            <li class="stagger-item">• UK</li>
+                            <li class="stagger-item">• France</li>
+                            <li class="stagger-item">• Italy</li>
+                            <li class="stagger-item">• Spain</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <hr class="border-slate-700 mb-20">
+    </div>
+
+    <!-- Why Choose LANCOX Section -->
+    <section class="py-20 bg-[#0F172B] scroll-animate">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">
+                    Why Choose <span class="text-gold">LANCOX</span>
+                </h2>
+                <p class="text-slate-300">Excellence in every aspect of industrial supply</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                <div
+                    class="bg-slate-800 rounded-xl p-8 space-y-4 why-card border border-slate-700 hover:border-gold card-animate">
+                    <div class="w-12 h-12 bg-gold rounded-lg flex items-center justify-center">
+                        <i class="bi bi-check-circle text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Quality Assurance</h3>
+                    <p class="text-slate-300">Transformers, cables, switchgear, and power distribution systems</p>
+                </div>
+
+                <div
+                    class="bg-slate-800 rounded-xl p-8 space-y-4 why-card border border-slate-700 hover:border-gold card-animate">
+                    <div class="w-12 h-12 bg-gold rounded-lg flex items-center justify-center">
+                        <i class="bi bi-clock-history text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Reliable Supply</h3>
+                    <p class="text-slate-300">Timely delivery from trusted global manufacturers</p>
+                </div>
+
+                <div
+                    class="bg-slate-800 rounded-xl p-8 space-y-4 why-card border border-slate-700 hover:border-gold card-animate">
+                    <div class="w-12 h-12 bg-gold rounded-lg flex items-center justify-center">
+                        <i class="bi bi-headset text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Expert Support</h3>
+                    <p class="text-slate-300">Dedicated team for customized solutions and guidance</p>
+                </div>
+
+                <div
+                    class="bg-slate-800 rounded-xl p-8 space-y-4 why-card border border-slate-700 hover:border-gold card-animate">
+                    <div class="w-12 h-12 bg-gold rounded-lg flex items-center justify-center">
+                        <i class="bi bi-globe text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Global Reach</h3>
+                    <p class="text-slate-300">Extensive network ensuring competitive pricing</p>
+                </div>
+
+                <div
+                    class="bg-slate-800 rounded-xl p-8 space-y-4 why-card border border-slate-700 hover:border-gold card-animate">
+                    <div class="w-12 h-12 bg-gold rounded-lg flex items-center justify-center">
+                        <i class="bi bi-lightbulb text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Innovation Focus</h3>
+                    <p class="text-slate-300">Cutting-edge products for modern industrial needs</p>
+                </div>
+
+                <div
+                    class="bg-slate-800 rounded-xl p-8 space-y-4 why-card border border-slate-700 hover:border-gold card-animate">
+                    <div class="w-12 h-12 bg-gold rounded-lg flex items-center justify-center">
+                        <i class="bi bi-leaf text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Sustainability</h3>
+                    <p class="text-slate-300">Eco-friendly sourcing and ethical practices</p>
+                </div>
+            </div>
+            <hr class="border-slate-700 mb-20">
+            <!-- CTA Section -->
+            <div class="bg-slate-800 rounded-2xl p-12 text-center scroll-animate border border-slate-700">
+                <h3 class="text-3xl font-bold text-white mb-4">
+                    Ready to Transform Your Supply Chain?
+                </h3>
+                <p class="text-slate-300 mb-8">Let's collaborate to deliver excellence to your operations</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="about.html"
+                        class="cta-primary px-8 py-3 rounded-full font-semibold inline-flex items-center">
+                        Lets Collaborate <i class="bi bi-arrow-right ml-2"></i>
+                    </a>
+                    <a href="quotes.html" class="btn-secondary px-8 py-3 rounded-full font-semibold">
+                        Request A Quote
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#060606] py-12 border-t border-slate-800 scroll-animate">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+
+                <!-- LOGO + SOCIALS -->
+                <div>
+                    <a href="/"
+                        class="flex items-center space-x-2 mb-4 logo-glow transition-transform duration-300 hover:scale-105">
+                        <img src="./assets/logo.svg" alt="Lancox Logo" class="w-36 h-36 object-contain">
+                    </a>
+
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Bridging the Best to the Esteemed Hands. Empowering industries through precision, trust, and
+                        global excellence.
+                    </p>
+
+                    <div class="flex space-x-3 mt-4">
+                        <a href="#"
+                            class="w-8 h-8 bg-slate-800 rounded flex items-center justify-center hover:bg-gold transition">
+                            <i class="bi bi-linkedin text-white text-lg"></i>
+                        </a>
+                        <a href="#"
+                            class="w-8 h-8 bg-slate-800 rounded flex items-center justify-center hover:bg-gold transition">
+                            <i class="bi bi-twitter-x text-white text-lg"></i>
+                        </a>
+                        <a href="#"
+                            class="w-8 h-8 bg-slate-800 rounded flex items-center justify-center hover:bg-gold transition">
+                            <i class="bi bi-youtube text-white text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- QUICK LINKS -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-slate-400 text-sm">
+                        <li><a href="about.html" class="hover:text-gold transition">About Us</a></li>
+                        <li><a href="products.html" class="hover:text-gold transition">Products</a></li>
+                        <li><a href="industries.html" class="hover:text-gold transition">Industries</a></li>
+                        <li><a href="#" class="hover:text-gold transition">Vision & Mission</a></li>
+                        <li><a href="#" class="hover:text-gold transition">Gallery</a></li>
+                    </ul>
+                </div>
+
+                <!-- PRODUCTS -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Products</h4>
+                    <ul class="space-y-2 text-slate-400 text-sm">
+                        <li><a href="#" class="hover:text-gold transition">Electrical Equipment</a></li>
+                        <li><a href="#" class="hover:text-gold transition">Safety Components</a></li>
+                        <li><a href="#" class="hover:text-gold transition">Instrumentation</a></li>
+                        <li><a href="#" class="hover:text-gold transition">Safety Equipment</a></li>
+                        <li><a href="#" class="hover:text-gold transition">Fasteners & Hardware</a></li>
+                    </ul>
+                </div>
+
+                <!-- CONTACT INFO -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-3 text-slate-400 text-sm">
+                        <li class="flex items-start space-x-2">
+                            <i class="bi bi-geo-alt-fill text-gold text-lg flex-shrink-0 mt-0.5"></i>
+                            <span>Abdal Ali near Ziyde Oudh<br>Dubai, Dubai, UAE</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="bi bi-telephone-fill text-gold text-lg"></i>
+                            <span>+971 (0) 4256636, 0566673271</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="bi bi-envelope-fill text-gold text-lg"></i>
+                            <span>sales@lancox.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- FOOTER BOTTOM -->
+            <div
+                class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-400 text-sm">
+                <p>©2025 Lancox. All Rights Reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-gold transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-gold transition">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add scroll effect to navigation
+        let lastScroll = 0;
+        const nav = document.querySelector('nav');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll <= 0) {
+                nav.classList.remove('shadow-lg');
+            } else {
+                nav.classList.add('shadow-lg');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Scroll Animations with Intersection Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all scroll-animate elements
+        document.querySelectorAll('.scroll-animate, .image-grid-item, .industry-item, .card-animate, .stagger-item, .why-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuToggle && mobileMenu) {
+            mobileMenuToggle.addEventListener('click', () => {
+                const isOpen = !mobileMenu.classList.contains('hidden');
+                if (isOpen) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('scale-y-100');
+                    mobileMenu.classList.add('scale-y-0');
+                } else {
+                    mobileMenu.classList.remove('hidden');
+                    // Force reflow for transition
+                    mobileMenu.offsetHeight;
+                    mobileMenu.classList.remove('scale-y-0');
+                    mobileMenu.classList.add('scale-y-100');
+                }
+            });
+
+            // Close menu when clicking a link
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('scale-y-100');
+                    mobileMenu.classList.add('scale-y-0');
+                });
+            });
+
+            // Close menu on outside click (optional enhancement)
+            document.addEventListener('click', (e) => {
+                if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target) && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('scale-y-100');
+                    mobileMenu.classList.add('scale-y-0');
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
